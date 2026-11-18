@@ -1,0 +1,43 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main stem -->
+  <path d="M50 85 Q45 75 40 65 Q35 55 30 45 Q25 35 25 25" stroke="#2d5a3d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Left leaf -->
+  <ellipse cx="35" cy="40" rx="12" ry="18" fill="#2d5a3d" transform="rotate(-30 35 40)"/>
+  <path d="M35 32 L35 48" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+  
+  <!-- Right main leaf with tree pattern -->
+  <ellipse cx="55" cy="25" rx="15" ry="22" fill="#2d5a3d" transform="rotate(15 55 25)"/>
+  
+  <!-- Tree pattern inside right leaf -->
+  <g transform="translate(55, 25) rotate(15)">
+    <!-- Main trunk -->
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="#4a7c59" stroke-width="1.5" opacity="0.8"/>
+    
+    <!-- Branches -->
+    <line x1="0" y1="-4" x2="-4" y2="-8" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+    <line x1="0" y1="-4" x2="4" y2="-8" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+    <line x1="0" y1="0" x2="-6" y2="-4" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+    <line x1="0" y1="0" x2="6" y2="-4" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+    <line x1="0" y1="4" x2="-4" y2="0" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+    <line x1="0" y1="4" x2="4" y2="0" stroke="#4a7c59" stroke-width="1" opacity="0.7"/>
+    
+    <!-- Small leaves on branches -->
+    <circle cx="-4" cy="-8" r="1.5" fill="#4a7c59" opacity="0.6"/>
+    <circle cx="4" cy="-8" r="1.5" fill="#4a7c59" opacity="0.6"/>
+    <circle cx="-6" cy="-4" r="1.5" fill="#4a7c59" opacity="0.6"/>
+    <circle cx="6" cy="-4" r="1.5" fill="#4a7c59" opacity="0.6"/>
+    <circle cx="-4" cy="0" r="1.5" fill="#4a7c59" opacity="0.6"/>
+    <circle cx="4" cy="0" r="1.5" fill="#4a7c59" opacity="0.6"/>
+  </g>
+  
+  <!-- Small branch elements -->
+  <line x1="40" y1="50" x2="35" y2="45" stroke="#2d5a3d" stroke-width="2" stroke-linecap="round"/>
+  <line x1="45" y1="60" x2="50" y2="55" stroke="#2d5a3d" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Curved root/base -->
+  <path d="M25 85 Q35 90 50 85 Q65 80 75 85" stroke="#2d5a3d" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Loop element at base -->
+  <ellipse cx="65" cy="82" rx="8" ry="5" fill="none" stroke="#2d5a3d" stroke-width="3" transform="rotate(20 65 82)"/>
+</svg>

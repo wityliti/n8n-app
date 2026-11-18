@@ -1,0 +1,48 @@
+{
+  "name": "n8n-nodes-afforestation",
+  "version": "0.1.0",
+  "description": "n8n nodes for Afforestation.org: plant trees, record impact, and trigger workflows on new impact.",
+  "keywords": [
+    "n8n-community-node-package",
+    "afforestation",
+    "trees",
+    "carbon",
+    "sustainability"
+  ],
+  "license": "MIT",
+  "homepage": "https://afforestation.org",
+  "author": {
+    "name": "Afforestation.org",
+    "email": "hello@afforestation.org"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "n8n-node build",
+    "lint": "n8n-node lint",
+    "lint:fix": "n8n-node lint --fix",
+    "dev": "n8n-node dev",
+    "test": "vitest run"
+  },
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "strict": true,
+    "credentials": [
+      "dist/credentials/AfforestationApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Afforestation/Afforestation.node.js",
+      "dist/nodes/AfforestationTrigger/AfforestationTrigger.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@n8n/node-cli": "^0.57.4",
+    "n8n-workflow": "^2.16.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
