@@ -85,7 +85,7 @@ export function buildImpactBody(i: {
 	if (isSet(i.treesPlanted)) body.treesPlanted = Number(i.treesPlanted);
 	if (isSet(i.co2OffsetKg)) body.co2OffsetKg = Number(i.co2OffsetKg);
 	if (body.treesPlanted === undefined && body.co2OffsetKg === undefined) {
-		throw new Error('Enter Trees Planted, CO₂ Offset (kg), or both');
+		throw new Error('Enter Trees Planted, CO₂ Offset (Kilograms), or both');
 	}
 	return withReferences(body, i);
 }

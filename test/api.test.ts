@@ -81,7 +81,7 @@ describe('buildImpactBody', () => {
 		}));
 	it('requires one value', () =>
 		expect(() => buildImpactBody({ treesPlanted: '', co2OffsetKg: '' })).toThrow(
-			'Enter Trees Planted, CO₂ Offset (kg), or both',
+			'Enter Trees Planted, CO₂ Offset (Kilograms), or both',
 		));
 	it('drops an empty side', () =>
 		expect(buildImpactBody({ treesPlanted: '', co2OffsetKg: 12.5 })).toEqual({
