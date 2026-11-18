@@ -69,14 +69,20 @@ async function pollImpact(this: IPollFunctions, state: TriggerState) {
 	}
 
 	const lastId = state.lastId;
-	const collected: ImpactEntryRaw[] = [];
-	let totalPages = 1;
-	for (let page = 1; page <= Math.min(totalPages, MAX_PAGES); page++) {
+	const fetchPage = async (page: number) => {
 		const qs: IDataObject = { limit: PAGE_SIZE, page };
 		if (state.since) qs.since = state.since;
-		const result = (await apiGet.call(this, '/api/v1/impact', qs)) as ImpactPage;
-		collected.push(...result.data);
-		totalPages = result.meta.totalPages;
+		return (await apiGet.call(this, '/api/v1/impact', qs)) as ImpactPage;
+	};
+
+	// Pages are newest first. When more than MAX_PAGES are waiting, read the
+	// oldest MAX_PAGES so nothing is skipped; the next poll continues from there.
+	const first = await fetchPage(1);
+	const totalPages = first.meta.totalPages;
+	const startPage = totalPages > MAX_PAGES ? totalPages - MAX_PAGES + 1 : 2;
+	const collected: ImpactEntryRaw[] = totalPages > MAX_PAGES ? [] : [...first.data];
+	for (let page = startPage; page <= totalPages; page++) {
+		collected.push(...(await fetchPage(page)).data);
 	}
 
 	const { emit, nextLastId, nextSince } = selectNewEntries(collected, lastId);

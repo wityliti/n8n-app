@@ -94,6 +94,42 @@ describe('New Impact Entry', () => {
 			expect(r.url.startsWith('http://localhost:4000/api/v1/impact')).toBe(true);
 	});
 
+	it('does not emit an entry twice when pages overlap', async () => {
+		// An insert between requests shifts page 1's last row onto page 2.
+		const h = harness({
+			event: 'newImpactEntry',
+			state: { lastId: 100, since: entry(100).created_at },
+			handler: (req) =>
+				(req.qs as IDataObject).page === 1
+					? impactPage(range(250, 151), 1, 2)
+					: impactPage(range(151, 101), 2, 2),
+		});
+		const out = ids(await h.poll());
+		expect(out).toHaveLength(150);
+		expect(new Set(out).size).toBe(150);
+	});
+
+	it('catches up oldest first when more than 1,000 entries are waiting', async () => {
+		// 1,200 new entries (ids 1201..2400, newest first): 12 pages, cap is 10.
+		const pageOf = (p: number) => range(2400 - (p - 1) * 100, 2301 - (p - 1) * 100);
+		const state: IDataObject = { lastId: 1200, since: entry(1200).created_at };
+		const h = harness({
+			event: 'newImpactEntry',
+			state,
+			handler: (req) =>
+				impactPage(
+					pageOf((req.qs as IDataObject).page as number),
+					(req.qs as IDataObject).page as number,
+					12,
+				),
+		});
+		const first = ids(await h.poll());
+		expect(first[0]).toBe(1201);
+		expect(first).toHaveLength(1000);
+		expect(first[999]).toBe(2200);
+		expect(state.lastId).toBe(2200);
+	});
+
 	it('manual mode returns latest without changing state', async () => {
 		const h = harness({
 			event: 'newImpactEntry',

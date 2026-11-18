@@ -48,7 +48,7 @@ The trigger polls Afforestation.org on n8n's polling schedule.
 | New Impact Entry | Emits one item per new impact entry, from any source (API, Shopify, dashboard), oldest first. Each entry is emitted once. |
 | Stats Changed | Emits your current stats when total trees or total CO₂ offset change. |
 
-When you activate a workflow, the trigger notes where things stand and emits nothing for existing entries. Each poll reads up to 1,000 new entries. **Fetch Test Event** returns the most recent entry or the current stats without changing what the trigger has seen.
+When you activate a workflow, the trigger notes where things stand and emits nothing for existing entries. Each poll emits up to 1,000 new entries, oldest first; if more are waiting, the rest come on the next poll. **Fetch Test Event** returns the most recent entry or the current stats without changing what the trigger has seen.
 
 ## Development
 
