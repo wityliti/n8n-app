@@ -89,3 +89,26 @@ export async function flattenStatsItems(
 		json: flattenStats(item.json as unknown as StatsResponse),
 	}));
 }
+
+export async function mapRecordedImpactItems(
+	this: IExecuteSingleFunctions,
+	items: INodeExecutionData[],
+): Promise<INodeExecutionData[]> {
+	return items.map((item) => {
+		const row = item.json as {
+			id: number;
+			trees_planted: number;
+			co2_offset_kg: string | number | null;
+			created_at: string;
+		};
+		return {
+			...item,
+			json: {
+				id: row.id,
+				treesPlanted: row.trees_planted,
+				co2OffsetKg: parseFloat(String(row.co2_offset_kg ?? 0)),
+				createdAt: row.created_at,
+			},
+		};
+	});
+}

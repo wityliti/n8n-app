@@ -37,6 +37,8 @@ See n8n's [community nodes guide](https://docs.n8n.io/integrations/community-nod
 | Record Impact | Records trees planted, CO₂ offset in kilograms, or both. Use it for impact from other sources. |
 | Get Stats | Returns total and monthly trees and CO₂ offset, and your active goal's progress. |
 
+Plant Trees and Record Impact both return the new entry as `id`, `treesPlanted`, `co2OffsetKg` (a number, in kilograms) and `createdAt`.
+
 > **Turn off "Retry On Fail" for Plant Trees and Record Impact.** The API does not de-duplicate requests, so a retry can plant trees twice.
 
 ### Afforestation Trigger

@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { Afforestation } from '../nodes/Afforestation/Afforestation.node';
 import {
 	flattenStatsItems,
+	mapRecordedImpactItems,
 	plantTreesPreSend,
 	recordImpactPreSend,
 	throwOnApiError,
@@ -163,5 +164,26 @@ describe('flattenStatsItems', () => {
 			monthlyTreesPlanted: 2,
 			activeGoalType: null,
 		});
+	});
+});
+
+describe('mapRecordedImpactItems', () => {
+	it('returns the same fields as Plant Trees, with CO₂ as a number', async () => {
+		const out = await mapRecordedImpactItems.call(
+			fakeThis(),
+			[{ json: { id: 61, trees_planted: 0, co2_offset_kg: '2.50', created_at: '2026-11-19T02:37:40.079Z' } }],
+			{ statusCode: 201, body: {}, headers: {} },
+		);
+		expect(out[0]!.json).toEqual({
+			id: 61,
+			treesPlanted: 0,
+			co2OffsetKg: 2.5,
+			createdAt: '2026-11-19T02:37:40.079Z',
+		});
+	});
+
+	it('is wired into the Record Impact operation after unwrapping data', () => {
+		const post = option('recordImpact').routing.output!.postReceive!;
+		expect(post[post.length - 1]).toBe(mapRecordedImpactItems);
 	});
 });

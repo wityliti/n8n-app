@@ -6,6 +6,7 @@ import {
 } from 'n8n-workflow';
 import {
 	flattenStatsItems,
+	mapRecordedImpactItems,
 	plantTreesPreSend,
 	recordImpactPreSend,
 	throwOnApiError,
@@ -119,7 +120,7 @@ export class Afforestation implements INodeType {
 						routing: {
 							request: { method: 'POST', url: '/api/v1/impact', ignoreHttpStatusErrors: true },
 							send: { preSend: [recordImpactPreSend] },
-							output: { postReceive: [throwOnApiError, unwrapData] },
+							output: { postReceive: [throwOnApiError, unwrapData, mapRecordedImpactItems] },
 						},
 					},
 				],
