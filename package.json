@@ -13,10 +13,10 @@
   "homepage": "https://afforestation.org",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wityliti/n8n-nodes-afforestation.git"
+    "url": "git+https://github.com/wityliti/n8n-app.git"
   },
   "bugs": {
-    "url": "https://github.com/wityliti/n8n-nodes-afforestation/issues"
+    "url": "https://github.com/wityliti/n8n-app/issues"
   },
   "author": {
     "name": "Afforestation.org",
